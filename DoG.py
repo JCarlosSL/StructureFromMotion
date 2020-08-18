@@ -46,7 +46,7 @@ def GenerateDoG(octaves):
     return dogs
 
 if __name__=='__main__':
-    img = cv.imread('thresh3.png')
+    img = cv.imread('thresh3.png',0)
     octaves = GenerateOctaves(img)
     dogs = GenerateDoG(octaves)
 
