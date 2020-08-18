@@ -7,6 +7,7 @@ from differentGaussian import *
 
 def ComputeKeypoints(dog, nro_dog):
     M,N = dog.shape[0],dog.shape[1]
+    #print(M,N)
     keypoint=[]
     for k in range(1,3):
         for i in range(1,M-1):
@@ -16,8 +17,12 @@ def ComputeKeypoints(dog, nro_dog):
 
                 values = np.concatenate((dog[i-1:i+2,j-1:j+2,k-1],np.concatenate((
                     dog[i-1:i+2,j-1:j+2,k],dog[i-1:i+2,j-1:j+2,k+1]))))
+#                obetenemos los valores de los 27 pixels incluyendo el X, y de esto, el max y min
+#                print(values)
                 max_value = np.max(values)
                 min_value = np.min(values)
+#                print(max_value)
+#                print(min_value)
 
                 if (dog[i,j,k]==max_value) or (dog[i,j,k] == min_value):
                     # find fisrt derivatives approximated as difference
@@ -37,6 +42,7 @@ def ComputeKeypoints(dog, nro_dog):
                             -dog[i,j+1,k-1]+dog[i,j-1,k-1])*0.25/255
                     dys = (dog[i+1,j,k+1]-dog[i-1,j,k+1]
                             -dog[i+1,j,k-1]+dog[i-1,j,k-1])*0.25/255
+
                     H = np.matrix([[dxx,dxy,dxs],[dxy,dyy,dys],[dxs,dys,dss]])
 
                     x_hat = np.linalg.lstsq(H,dD,rcond=None)[0]
@@ -54,6 +60,7 @@ def ComputeKeypoints(dog, nro_dog):
                         temp_keypoint = KEYPOINT(i=i,j=j,octave=nro_dog,DoG=k,
                                 x=j+x_hat[0],y=i+x_hat[1])
                         keypoint.append(temp_keypoint)
+    return keypoint
 
 def GenerateKeyPoint(dogs):
     keypoints = []

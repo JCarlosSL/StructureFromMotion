@@ -45,8 +45,9 @@ def generateDoG(octaves):
     for i in range(OCTAVE_DIMENSION-1):
         dogs.append(computeDoG(octaves[i]))
     return dogs
-
+"""
 if __name__ == '__main__':
     image = cv.imread('sample-input.jpeg',0)
     octaves = generateScaleSpace(image)
-    dogs = generateDoG(octaves)
+   # dogs = generateDoG(octaves)
+"""   
