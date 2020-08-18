@@ -22,7 +22,7 @@ def processimage(path):
 	# Display output image
 	plt.imshow(output_image)
 	plt.show()
-	return keypoints
+	return (keypoints,descriptor)
 
 keyp = []
 imgs = ['img1.jpeg',
@@ -31,5 +31,5 @@ imgs = ['img1.jpeg',
 		'img4.jpeg',]
 for i in range(len(imgs)):
 	keyp.append(processimage(imgs[i]))
-	print(len(keyp[i]))
+	print(len(keyp[i][0]))
 
